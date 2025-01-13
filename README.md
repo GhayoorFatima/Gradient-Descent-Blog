@@ -112,3 +112,63 @@ Gradient descent is essential in a wide range of machine learning applications, 
 ## Conclusion
 
 Gradient descent is a foundational algorithm in machine learning, providing a systematic way to optimize models. By understanding its workings, types, and challenges, you can better harness its power in your data science projects. Whether you’re training a simple regression model or a complex neural network, gradient descent remains at the heart of model optimization.
+
+# Generic Python Implementation of Gradient Descent
+import numpy as np
+
+def gradient_descent(objective_function, gradient_function, initial_params, learning_rate, max_iterations, tolerance):
+    """
+    Perform gradient descent to minimize an objective function.
+
+    Parameters:
+        objective_function (callable): The function to minimize.
+        gradient_function (callable): The gradient of the objective function.
+        initial_params (numpy.ndarray): Initial parameters for the optimization.
+        learning_rate (float): Step size for parameter updates.
+        max_iterations (int): Maximum number of iterations.
+        tolerance (float): Stopping criterion for convergence.
+
+    Returns:
+        params (numpy.ndarray): Optimized parameters.
+        history (list): Objective function values during optimization.
+    """
+    params = initial_params
+    history = []
+
+    for i in range(max_iterations):
+        # Calculate the gradient and the objective function value
+        gradient = gradient_function(params)
+        obj_value = objective_function(params)
+
+        # Update parameters
+        params = params - learning_rate * gradient
+
+        # Record the objective function value
+        history.append(obj_value)
+
+        # Check for convergence
+        if np.linalg.norm(gradient) < tolerance:
+            print(f"Convergence achieved after {i+1} iterations.")
+            break
+
+    return params, history
+
+# Example Usage
+# Define a sample objective function: f(x) = x^2
+objective_function = lambda x: x**2
+# Define its gradient: f'(x) = 2x
+gradient_function = lambda x: 2 * x
+
+# Parameters for Gradient Descent
+initial_params = np.array([10.0])  # Starting point
+learning_rate = 0.1
+max_iterations = 1000
+tolerance = 1e-6
+
+# Run Gradient Descent
+optimized_params, history = gradient_descent(
+    objective_function, gradient_function, initial_params, learning_rate, max_iterations, tolerance
+)
+
+print(f"Optimized Parameters: {optimized_params}")
+print(f"Objective Function Value: {objective_function(optimized_params)}")
