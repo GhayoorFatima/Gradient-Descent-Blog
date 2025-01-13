@@ -114,6 +114,7 @@ Gradient descent is essential in a wide range of machine learning applications, 
 Gradient descent is a foundational algorithm in machine learning, providing a systematic way to optimize models. By understanding its workings, types, and challenges, you can better harness its power in your data science projects. Whether you’re training a simple regression model or a complex neural network, gradient descent remains at the heart of model optimization.
 
 # Generic Python Implementation of Gradient Descent
+```python
 import numpy as np
 
 def gradient_descent(objective_function, gradient_function, initial_params, learning_rate, max_iterations, tolerance):
